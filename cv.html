@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Danial Fitri – CV</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="nf-header">
+    <div class="nf-inner">
+      <a href="index.html" class="nf-logo">DANIAL FITRI</a>
+      <nav class="nf-nav">
+        <a href="index.html">Home</a>
+        <a href="cv.html" class="active">Curriculum Vitae</a>
+        <a href="#movies">Movies</a>
+        <a href="#games">Games</a>
+        <a href="#new">New & Popular</a>
+        <a href="#list">My List</a>
+        <a href="#lang">Browse by Languages</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="display:flex;justify-content:center;align-items:center;flex-direction:column;gap:16px;padding:80px 0;">
+    <img id="cvImg" alt="CV Page" style="max-width:90%;height:auto;border:2px solid #444;border-radius:8px;">
+    <div class="cv-controls" style="display:flex;gap:12px;align-items:center;">
+      <button id="prev">⬅ Previous</button>
+      <span>Page <span id="at">1</span> of <span id="total">—</span></span>
+      <button id="next">Next ➡</button>
+    </div>
+  </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // If your images are in a subfolder, set base = "images/";
+    const base = ""; // same folder as cv.html
+
+    const pages = [
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0001.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0002.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0003.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0004.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0005.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0006.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0007.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0008.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0009.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0010.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0011.jpg",
+      "2025-Oct - CV AHMAD DANIAL FITRI BIN OSMAN_page-0012.jpg"
+    ].map(name => base + name);
+
+    const img   = document.getElementById('cvImg');
+    const prev  = document.getElementById('prev');
+    const next  = document.getElementById('next');
+    const at    = document.getElementById('at');
+    const total = document.getElementById('total');
+
+    let i = 0;
+    total.textContent = pages.length;
+
+    function render() {
+      img.src = pages[i];
+      at.textContent = i + 1;
+      prev.disabled = (i === 0);
+      next.disabled = (i === pages.length - 1);
+    }
+
+    prev.addEventListener('click', () => { if (i > 0) { i--; render(); }});
+    next.addEventListener('click', () => { if (i < pages.length - 1) { i++; render(); }});
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  prev.click();
+      if (e.key === 'ArrowRight') next.click();
+    });
+
+    render();
+  });
+  </script>
+</body>
+</html>
